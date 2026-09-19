@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Reading">
+  <title>Reading</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app">
+    <p id="boot-error" class="error" hidden></p>
+
+    <section id="view-setup" class="view" hidden>
+      <h1>What’s the next book you’re reading?</h1>
+      <form id="form-setup">
+        <label for="book-title">Book title</label>
+        <input id="book-title" name="title" type="text" autocomplete="off" enterkeyhint="next" required>
+        <label for="last-page">Last readable page</label>
+        <input id="last-page" name="lastPage" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" enterkeyhint="done" required>
+        <p id="setup-error" class="error" hidden></p>
+        <button type="submit">Start reading</button>
+      </form>
+    </section>
+
+    <section id="view-reading" class="view" hidden>
+      <h1 id="reading-title"></h1>
+      <p id="reading-date" class="date"></p>
+      <form id="form-reading">
+        <label for="page-reached">Page I’ve read to</label>
+        <input id="page-reached" name="page" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" enterkeyhint="done" required>
+        <p id="reading-error" class="error" hidden></p>
+        <button type="submit">Save</button>
+      </form>
+      <div id="reading-finish" class="finish-block" hidden>
+        <p id="reading-progress" class="progress"></p>
+        <p id="reading-percent" class="percent"></p>
+        <button type="button" id="btn-finished">Finished!</button>
+      </div>
+    </section>
+
+    <section id="view-history" class="view history-view" hidden>
+      <h1 id="history-title"></h1>
+      <div id="history-list" class="history-list"></div>
+      <div class="summary">
+        <p id="summary-pages" class="progress"></p>
+        <p id="summary-percent" class="percent"></p>
+      </div>
+      <div class="history-actions">
+        <button type="button" id="btn-reading">Reading</button>
+        <button type="button" id="btn-settings" class="secondary">Settings</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="settings" class="overlay" hidden>
+    <div class="card" role="dialog" aria-labelledby="settings-title">
+      <h2 id="settings-title">Settings</h2>
+      <form id="form-settings">
+        <label for="reminder-threshold">New Book Reminder</label>
+        <div class="threshold-row">
+          <input id="reminder-threshold" name="threshold" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" required>
+          <span>%</span>
+        </div>
+        <p id="settings-error" class="error" hidden></p>
+        <button type="submit">Save</button>
+        <button type="button" id="btn-settings-close" class="secondary">Close</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="reminder" class="overlay" hidden>
+    <div class="card" role="dialog" aria-labelledby="reminder-title">
+      <p id="reminder-title">You’re getting close to the end of this book. Time to get another one?</p>
+      <button type="button" id="btn-reminder-ok">OK</button>
+    </div>
+  </div>
+
+  <script src="./vendor/supabase.js"></script>
+  <script src="./supabase-config.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
