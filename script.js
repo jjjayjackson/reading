@@ -323,6 +323,11 @@ formReading.addEventListener("submit", async (event) => {
   maybeShowReminder();
 });
 
+document.getElementById("btn-history").addEventListener("click", () => {
+  renderHistory();
+  showView("history");
+});
+
 document.getElementById("btn-reading").addEventListener("click", () => {
   reminderEl.hidden = true;
   renderReading();
